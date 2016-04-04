@@ -3,9 +3,9 @@ using System.Collections;
 
 public class General : MonoBehaviour {
 
-	public int recurso1=0;
-	public int recurso2=0;
-	public int recurso3=0;
+	public static int recurso1=100;
+	public static int recurso2=200;
+	public static int recurso3=90;
 
 	// Use this for initialization
 	void Start () {
