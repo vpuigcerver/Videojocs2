@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Isla.unity
+- path: Assets/Menus/CreadorArmas.unity
   isLoaded: 1
   isActive: 1
