@@ -20,7 +20,7 @@ ExportedObj/
 *.dwlt
 
 # Unity3D generated meta files
-./Library/metadata/*
+LaIslaMinotauro/Library/metadata/*
 *.pidb.meta
 *.meta
 
