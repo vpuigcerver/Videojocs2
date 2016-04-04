@@ -55,6 +55,7 @@ public class Enemy : MonoBehaviour {
     }
     void GoTo()
     {
+		Debug.Log ("Distance:  "+Vector3.Distance (target.position, transform.position));
         transform.LookAt(target);
 
         Vector3 fwd = transform.TransformDirection(Vector3.forward);//unitario
@@ -68,12 +69,18 @@ public class Enemy : MonoBehaviour {
                 return;
             }
         }
-        
+		if (Vector3.Distance(target.position, transform.position) > GotoDistance)
+		{
+			Debug.Log ("GO LOOK FOR");
+			CurState = State.LOOK_FOR;
+			return;
+		}
 
-        if (Vector3.Distance(target.position, transform.position) > AttackDistance)
+        else if (Vector3.Distance(target.position, transform.position) > AttackDistance)
         {
             transform.position = Vector3.MoveTowards(transform.position, target.position, Speed * Time.deltaTime);
         }
+
         else
         {
             CurState = State.ATTACK;
@@ -86,12 +93,29 @@ public class Enemy : MonoBehaviour {
         
         if(CurTime < 0)
         {
+			
             PlayerScript.health--;
             CurTime = AttackTimer;
         }
-        if (Vector3.Distance(target.position, transform.position) > AttackDistance)
+       if (Vector3.Distance(target.position, transform.position) > AttackDistance)
         {
             CurState = State.GOTO;
         }
+		if (Vector3.Distance (target.position, transform.position) < AttackDistance) {
+
+			transform.position = Vector3.MoveTowards (transform.position, target.position, Speed * 5.0f * Time.deltaTime);
+			if (CurTime < 0) {
+				CurState = State.LOOK_FOR;
+
+			}
+
+		} 
     }
+	void OnCollisionEnter(Collision other){
+		if (other.gameObject.tag == ("Player")) {
+
+			CurState = State.LOOK_FOR;
+
+		}
+	}
 }
